@@ -1,39 +1,12 @@
-# PodBrief
+# PodPulse AI — Podcast Summarizer Studio
 
-A minimal SaaS-style podcast summarizer. Upload an audio file or paste a **direct audio-file URL**. The backend transcribes it with OpenAI Whisper and produces a structured summary with an OpenAI chat model.
+## Included Files
+- `index.html`: Main application interface (links to `styles.css` and `app.js`).
+- `styles.css`: Custom dark-mode studio styles and timestamp chip animations.
+- `app.js`: Core application logic (YouTube IFrame player controller, local audio/video/SRT parser, Web Audio demo WAV synthesizer, Gemini API integration, and Markdown/JSON exporter).
+- `sample-podcast.srt`: A sample subtitle file you can drag-and-drop into the Local File Upload tab.
 
-## Features
-- Audio upload: MP3, WAV, M4A, MP4, MPEG and WEBM
-- Direct audio URL ingestion (MP3/M4A/etc.)
-- AI episode overview
-- 5–8 major discussion points
-- Key takeaways, notable quotes and topic tags
-- Timestamp fields when provided by the transcription/model
-
-## Requirements
-- Python 3.10+
-- An OpenAI API key with access to audio transcription and chat completions
-
-## Run locally
-```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-```
-Put your key in `.env`, then:
-```bash
-uvicorn app:app --reload
-```
-Open http://127.0.0.1:8000
-
-## Important limitations
-- The transcription API currently accepts files up to 25 MB; this demo enforces a 24 MB limit. Long episodes may need compression or chunking before upload.
-- URL mode expects a **direct public audio file URL**. Spotify, Apple Podcasts, YouTube and other episode webpage links are not direct audio files and will not work unless you obtain the direct audio/enclosure URL.
-- Timestamp precision depends on the transcript/model output; timestamps may be omitted rather than guessed.
-- This starter app does not include accounts, billing, persistent history, background jobs, or production deployment hardening.
-- Audio is held temporarily on the server for processing and deleted afterward. Configure hosting, retention and privacy policies before public deployment.
-- Add rate limiting, file scanning, SSRF protections and authentication before exposing the service publicly.
+## How to Run
+1. Open `index.html` directly in any modern browser (Chrome, Edge, Brave, Firefox), or serve the folder using VS Code Live Server / `python -m http.server 8000`.
+2. Choose **YouTube Link** or **Local File Upload**.
+3. (Optional) Paste a Gemini API key in the top bar for live `gemini-2.5-flash` analysis, or use the built-in offline analyzer immediately.
